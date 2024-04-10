@@ -1,6 +1,6 @@
 name: My Workflow
 
-on: [push]
+on: push
 
 jobs:
   job1:
