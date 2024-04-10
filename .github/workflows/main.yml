@@ -15,16 +15,19 @@ jobs:
     if: always()
     steps:
       - name: Select Job
-        id: select_job
         run: |
           echo "Choose which job to run next:"
           echo "1. Job 2"
           echo "2. Job 3"
-          echo "::set-env name=SELECTED_JOB::$(read)"
+          echo "SELECTED_JOB=$(read)" >> $GITHUB_ENV
       - name: Run Selected Job
-        if: env.SELECTED_JOB == '1'
-        run: echo "Running Job 2"
-      - name: Run Selected Job
-        if: env.SELECTED_JOB == '2'
-        run: echo "Running Job 3"
-        
+        run: |
+          if [ "$SELECTED_JOB" == "1" ]; then
+            echo "Running Job 2"
+          elif [ "$SELECTED_JOB" == "2" ]; then
+            echo "Running Job 3"
+          else
+            echo "Invalid selection: $SELECTED_JOB"
+            exit 1
+          fi
+          
