@@ -22,6 +22,7 @@ jobs:
           echo "SELECTED_JOB=$(read)" >> $GITHUB_ENV
       - name: Run Selected Job
         run: |
+          SELECTED_JOB="$SELECTED_JOB"  # Получаем значение переменной из файла среды
           if [ "$SELECTED_JOB" == "1" ]; then
             echo "Running Job 2"
           elif [ "$SELECTED_JOB" == "2" ]; then
@@ -30,4 +31,6 @@ jobs:
             echo "Invalid selection: $SELECTED_JOB"
             exit 1
           fi
-          
+        shell: /usr/bin/bash
+      env:
+        SELECTED_JOB: ${{ env.SELECTED_JOB }}
