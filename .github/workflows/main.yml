@@ -1,6 +1,6 @@
 name: My Workflow
 
-on: push
+on: [push]
 
 jobs:
   job1:
@@ -43,4 +43,3 @@ jobs:
       - name: Run Selected Job
         if: steps.select_job.outputs.selected_job == '2'
         run: echo "Running Job 3"
-        
