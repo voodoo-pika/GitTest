@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: job1
     if: always()
+    shell: /usr/bin/bash
+    env:
+      SELECTED_JOB: ${{ env.SELECTED_JOB }}
     steps:
       - name: Select Job
         run: |
@@ -31,6 +34,4 @@ jobs:
             echo "Invalid selection: $SELECTED_JOB"
             exit 1
           fi
-        shell: /usr/bin/bash
-      env:
-        SELECTED_JOB: ${{ env.SELECTED_JOB }}
+          
